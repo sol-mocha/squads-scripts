@@ -1,0 +1,8 @@
+{
+  "name": "squads-scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dcaf-mocha/squads-scripts.git",
+  "author": "Mocha Dcaf <mocha@dcaf.so>",
+  "license": "MIT"
+}
