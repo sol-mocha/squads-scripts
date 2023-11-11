@@ -6,10 +6,18 @@
   "author": "Mocha Dcaf <mocha@dcaf.so>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
   },
   "devDependencies": {
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@jup-ag/dca-sdk": "^2.3.5",
+    "@solana/web3.js": "^1.87.5",
+    "@sqds/sdk": "^2.0.4",
+    "bs58": "^5.0.0",
+    "dotenv": "^16.3.1"
   }
 }
