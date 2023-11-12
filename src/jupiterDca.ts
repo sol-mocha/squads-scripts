@@ -3,10 +3,13 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import { Config } from "./config";
 import Base58 from "bs58";
 
-export const SECONDS_IN_MINUTE = 60; // 1 minute
-export const SECONDS_IN_DAY = 86400; // 1 day
-export const MINUTES_IN_A_WEEK = 10080;
-export const MINUTES_IN_A_DAY = 1440;
+// export const SECONDS_IN_MINUTE = 60; // 1 minute
+// export const SECONDS_IN_DAY = 86400; // 1 day
+// export const MINUTES_IN_A_WEEK = 10080;
+// export const MINUTES_IN_A_DAY = 1440;
+
+export const SECONDS_IN_A_HOUR = 3600;
+export const HOURS_IN_A_WEEK = 168;
 
 async function jupiterDcaInstructions({
   squadsVault,
@@ -23,20 +26,22 @@ async function jupiterDcaInstructions({
   const config = new Config();
   const connection = new Connection(config.connection);
   const dca = new DCA(connection, Network.MAINNET);
-
-  // const inAmountPerCycle = BigInt(inAmount) / BigInt(MINUTES_IN_A_WEEK);
-  const inAmountPerCycle = BigInt(BigInt(inAmount) / BigInt(MINUTES_IN_A_DAY));
+  const inAmountPerCycle = BigInt(inAmount) / BigInt(HOURS_IN_A_WEEK);
+  const cycleSecondsApart = BigInt(SECONDS_IN_A_HOUR);
+  console.log(
+    `expected to swap ${inAmountPerCycle.toString()} every ${cycleSecondsApart} seconds until a total of ${inAmount.toString()} is swapped`
+  );
   const params: CreateDCAParamsV2 = {
     payer: squadsVault,
     user: squadsVault,
     inAmount,
     inAmountPerCycle,
-    cycleSecondsApart: BigInt(SECONDS_IN_MINUTE),
+    cycleSecondsApart,
     inputMint,
     outputMint,
     minOutAmountPerCycle: null,
     maxOutAmountPerCycle: null,
-    startAt: BigInt(Math.floor(new Date().getTime() / 1000)), // start now
+    startAt: BigInt(Math.floor(new Date().getTime() / 1000)),
   };
 
   const { tx, dcaPubKey } = await dca.createDcaV2(params);
