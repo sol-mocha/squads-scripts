@@ -2,9 +2,18 @@
 
 Collection of scripts to propose custom squad transactions.
 
-Example commands:
+## How to Use these Scripts?
 
-## Jupiter
+The scripts currently just print out an easy to read/copy instructions in the context of a squads vault.
+You may take the data printed in the console and use the `custom instruction` option in the squads `tx builder` to propose
+the transaction.
+
+## Getting Started
+
+- Create `.env` file
+- Populate `SOLANA_RPC_URL` env var in `.env` file
+
+## Jupiter DCA
 
 ```bash
 # Propose a JUP DCA (check script to configure granularity and frequency of swaps)
